@@ -54,10 +54,6 @@ const GaneshaHeader = ({ className = "w-16 h-16 md:w-20 md:h-20" }) => {
           </linearGradient>
         </defs>
       </svg>
-      {/* Om / Mantram Symbol Subtitle */}
-      <span className="font-serif text-amber-600 text-xs tracking-widest mt-1 opacity-90 select-none">
-        || श्री गणेशाय नमः ||
-      </span>
     </div>
   );
 };

@@ -9,100 +9,106 @@ const Invitation = () => {
   return (
     <section id="invitation" className="py-16 md:py-24 px-4 bg-[var(--color-bg-base)] relative transition-colors duration-500">
       <div className="max-w-3xl mx-auto">
+        
         {/* Section Title */}
         <div className="text-center mb-10">
-          <p className="font-garamond italic text-amber-300 text-lg">Traditional Card Panel</p>
-          <h2 className="font-cinzel text-3xl md:text-4xl font-bold text-gold-gradient tracking-wide uppercase">
-            Wedding Invitation
+          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-gold-gradient tracking-wider uppercase">
+            Wedding Reception Invitation
           </h2>
-          <div className="w-24 h-[2px] bg-amber-500/60 mx-auto mt-2" />
+          <div className="w-28 h-[2px] bg-[var(--color-gold-mid)] mx-auto mt-3 shadow-[0_0_8px_var(--color-gold-mid)]" />
         </div>
 
-        {/* Physical Invitation Card Frame (Ivory Panel) */}
+        {/* Physical Invitation Card Frame (Emerald & Antique Gold Stationery Card) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
+          className="relative"
         >
-          <GoldBorder className="text-[#1c1917]">
-            <div className="text-center py-4 px-2 md:px-8 space-y-6">
+          {/* Subtle Ambient Backing Glow */}
+          <div className="absolute -inset-1 rounded-3xl bg-[var(--color-gold-mid)]/15 blur-xl pointer-events-none" />
+
+          <GoldBorder>
+            <div className="text-center py-4 px-2 sm:px-6 md:px-8 space-y-6">
               
-              {/* Lord Ganesha Top Icon */}
-              <GaneshaHeader className="w-16 h-16 md:w-20 md:h-20" />
+              {/* Lord Ganesha Top Icon - Centered without Hindi Writing */}
+              <div className="flex justify-center items-center">
+                <GaneshaHeader className="w-16 h-16 md:w-20 md:h-20 mx-auto" />
+              </div>
 
               {/* Groom's Host Family & Address */}
-              <div className="border-b border-[#d4af37]/30 pb-6 space-y-1">
-                <h3 className="font-garamond font-bold text-lg md:text-xl text-[#78350f]">
+              <div className="border-b border-[var(--color-gold-border)]/50 pb-6 space-y-1.5">
+                <h3 className="font-garamond font-bold text-xl md:text-2xl text-[var(--color-gold-light)]">
                   {weddingData.groom.parents}
                 </h3>
-                <p className="font-garamond text-stone-700 text-sm md:text-base leading-relaxed">
+                <p className="font-garamond text-[var(--color-text-muted)] text-sm md:text-base leading-relaxed">
                   {weddingData.groom.addressLines[0]}
                   <br />
                   {weddingData.groom.addressLines[1]}
                 </p>
-                <p className="font-garamond font-semibold text-stone-800 text-sm mt-1">
+                <p className="font-cinzel text-xs text-[var(--color-gold-mid)] tracking-wider mt-1 font-semibold">
                   Mob : {weddingData.groom.mobile}
                 </p>
               </div>
 
               {/* Invitation Text Wording */}
               <div className="py-2 space-y-2">
-                <p className="font-garamond italic text-stone-800 text-base md:text-lg">
+                <p className="font-garamond italic text-[var(--color-gold-light)] text-lg md:text-xl">
                   {weddingData.invitationText.greeting}
                 </p>
-                <p className="font-garamond italic text-stone-700 text-base md:text-lg">
+                <p className="font-garamond italic text-[var(--color-text-muted)] text-base md:text-lg">
                   {weddingData.invitationText.occasion}
                 </p>
-                <h4 className="font-cinzel font-bold text-[#b45309] text-base md:text-xl tracking-wider uppercase pt-2">
+                <h4 className="font-cinzel font-bold text-gold-gradient text-lg md:text-2xl tracking-widest uppercase pt-2">
                   {weddingData.invitationText.eventTitle}
                 </h4>
               </div>
 
-              {/* Groom Name (Prominent) */}
+              {/* Groom Name (Romantic Flourish Brush Calligraphy) */}
               <div className="py-2">
-                <h2 className="font-calligraphy text-4xl sm:text-5xl md:text-6xl text-[#78350f] font-bold drop-shadow-sm">
+                <h2 className="font-calligraphy text-4xl sm:text-6xl md:text-7xl text-gold-shine font-bold drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)] py-1">
                   {weddingData.groom.name}
                 </h2>
               </div>
 
               {/* Groom Lineage */}
-              <div className="bg-[#fef3c7]/40 p-4 rounded-lg border border-[#fde68a] text-stone-800 text-xs md:text-sm font-garamond leading-relaxed space-y-2 max-w-xl mx-auto">
+              <div className="bg-[var(--color-bg-base)]/85 p-4 md:p-5 rounded-2xl border border-[var(--color-gold-border)]/60 text-[var(--color-text-muted)] text-xs md:text-sm font-garamond leading-relaxed space-y-2 max-w-xl mx-auto shadow-inner">
                 <p>{weddingData.groom.lineage1}</p>
-                <p className="italic font-bold text-[#b45309]">and</p>
+                <p className="italic font-bold text-[var(--color-gold-mid)] font-serif">and</p>
                 <p>{weddingData.groom.lineage2}</p>
               </div>
 
               {/* Decorative Mandap Divider */}
               <div className="my-6">
-                <MandapIllustration className="w-32 h-16 mx-auto" />
+                <MandapIllustration className="w-28 h-14 mx-auto opacity-90" />
                 <div className="flex items-center justify-center gap-3 my-2">
-                  <span className="w-16 h-[1px] bg-[#d4af37]" />
-                  <span className="font-garamond italic text-[#78350f] font-bold text-lg">weds</span>
-                  <span className="w-16 h-[1px] bg-[#d4af37]" />
+                  <span className="w-16 sm:w-24 h-[1px] bg-gradient-to-r from-transparent to-[var(--color-gold-mid)]" />
+                  <span className="font-calligraphy italic text-[var(--color-gold-light)] font-bold text-2xl px-2">weds</span>
+                  <span className="w-16 sm:w-24 h-[1px] bg-gradient-to-l from-transparent to-[var(--color-gold-mid)]" />
                 </div>
               </div>
 
-              {/* Bride Name (Prominent) */}
+              {/* Bride Name (Romantic Flourish Brush Calligraphy) */}
               <div className="py-2">
-                <h2 className="font-calligraphy text-4xl sm:text-5xl md:text-6xl text-[#78350f] font-bold drop-shadow-sm">
+                <h2 className="font-calligraphy text-4xl sm:text-6xl md:text-7xl text-gold-shine font-bold drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)] py-1">
                   {weddingData.bride.name}
                 </h2>
               </div>
 
               {/* Bride Family & Address */}
-              <div className="pt-2 space-y-1 text-stone-800">
-                <h3 className="font-garamond font-bold text-base md:text-lg text-[#78350f]">
+              <div className="pt-2 space-y-1.5 text-[var(--color-text-muted)]">
+                <h3 className="font-garamond font-bold text-lg md:text-xl text-[var(--color-gold-light)]">
                   {weddingData.bride.parents}
                 </h3>
-                <p className="font-garamond text-stone-700 text-sm md:text-base">
+                <p className="font-garamond text-sm md:text-base">
                   {weddingData.bride.addressLines[0]}
                 </p>
               </div>
 
               {/* Bottom Card Footer Ornament */}
-              <div className="pt-4 border-t border-[#d4af37]/30">
-                <p className="font-cinzel text-xs text-[#b45309] tracking-widest uppercase">
+              <div className="pt-6 border-t border-[var(--color-gold-border)]/40">
+                <p className="font-cinzel text-xs text-[var(--color-gold-mid)] tracking-[0.25em] uppercase font-semibold">
                   ✦ Cordially Invited ✦
                 </p>
               </div>

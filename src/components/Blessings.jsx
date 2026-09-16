@@ -29,7 +29,7 @@ const Blessings = () => {
   };
 
   return (
-    <section className="py-20 px-4 bg-wedding-gradient relative overflow-hidden text-center transition-colors duration-500">
+    <section id="blessings" className="py-20 px-4 bg-wedding-gradient relative overflow-hidden text-center transition-colors duration-500">
       <div className="max-w-3xl mx-auto relative z-10">
         
         <motion.div
