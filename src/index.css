@@ -1,0 +1,271 @@
+@import "tailwindcss";
+
+:root {
+  /* Default Typography */
+  --font-calligraphy: 'Cinzel Decorative', 'Playfair Display', serif;
+  --font-cinzel: 'Cinzel', serif;
+  --font-cinzel-dec: 'Cinzel Decorative', serif;
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-playfair: 'Playfair Display', serif;
+  --font-pinyon: 'Pinyon Script', cursive;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+
+  /* Default Theme: Royal Emerald & Warm Antique Gold */
+  --color-bg-base: #041a13;
+  --color-bg-surface: #07261d;
+  --color-bg-card: #0c3529;
+  --color-gradient-start: #0f4636;
+  --color-gradient-mid: #07261d;
+  --color-gradient-end: #041a13;
+  --color-gold-light: #fef4cf;
+  --color-gold-mid: #e1be65;
+  --color-gold-dark: #b38b34;
+  --color-gold-border: rgba(225, 190, 101, 0.45);
+  --color-gold-shadow: rgba(225, 190, 101, 0.25);
+  --color-text-main: #fbf9f5;
+  --color-text-muted: #d4cfc3;
+  --color-text-subtle: #9ea7a1;
+}
+
+/* Theme: Royal Emerald & Antique Gold (Traditional South Indian / Kerala Royal) */
+[data-theme="emerald"] {
+  --color-bg-base: #041a13;
+  --color-bg-surface: #07261d;
+  --color-bg-card: #0c3529;
+  --color-gradient-start: #0f4636;
+  --color-gradient-mid: #07261d;
+  --color-gradient-end: #041a13;
+  --color-gold-light: #fef4cf;
+  --color-gold-mid: #e1be65;
+  --color-gold-dark: #b38b34;
+  --color-gold-border: rgba(225, 190, 101, 0.45);
+  --color-gold-shadow: rgba(225, 190, 101, 0.25);
+  --color-text-main: #fbf9f5;
+  --color-text-muted: #d4cfc3;
+  --color-text-subtle: #9ea7a1;
+}
+
+/* Theme: Burgundy Wine & Imperial Gold (Regal Romance) */
+[data-theme="burgundy"] {
+  --color-bg-base: #18050e;
+  --color-bg-surface: #270916;
+  --color-bg-card: #3c0f24;
+  --color-gradient-start: #4d132e;
+  --color-gradient-mid: #270916;
+  --color-gradient-end: #18050e;
+  --color-gold-light: #fef2d2;
+  --color-gold-mid: #e5be64;
+  --color-gold-dark: #b78a2e;
+  --color-gold-border: rgba(229, 190, 100, 0.45);
+  --color-gold-shadow: rgba(229, 190, 100, 0.25);
+  --color-text-main: #fcf9f9;
+  --color-text-muted: #e0d0d5;
+  --color-text-subtle: #a8949b;
+}
+
+/* Theme: Midnight Sapphire & Celestial Gold (Deep Majestic Blue) */
+[data-theme="sapphire"] {
+  --color-bg-base: #060b17;
+  --color-bg-surface: #0c162c;
+  --color-bg-card: #132244;
+  --color-gradient-start: #1c3263;
+  --color-gradient-mid: #0c162c;
+  --color-gradient-end: #060b17;
+  --color-gold-light: #fef7db;
+  --color-gold-mid: #e0c274;
+  --color-gold-dark: #b08d3b;
+  --color-gold-border: rgba(224, 194, 116, 0.45);
+  --color-gold-shadow: rgba(224, 194, 116, 0.25);
+  --color-text-main: #f8fafc;
+  --color-text-muted: #cbd5e1;
+  --color-text-subtle: #8fa0b5;
+}
+
+/* Theme: Imperial Velvet Plum & Crown Gold */
+[data-theme="plum"] {
+  --color-bg-base: #12051b;
+  --color-bg-surface: #200a2e;
+  --color-bg-card: #311145;
+  --color-gradient-start: #431760;
+  --color-gradient-mid: #200a2e;
+  --color-gradient-end: #12051b;
+  --color-gold-light: #fff2d2;
+  --color-gold-mid: #dfbd69;
+  --color-gold-dark: #b18c35;
+  --color-gold-border: rgba(223, 189, 105, 0.45);
+  --color-gold-shadow: rgba(223, 189, 105, 0.25);
+  --color-text-main: #fbf8fc;
+  --color-text-muted: #d9cedd;
+  --color-text-subtle: #a192a6;
+}
+
+/* Theme: Ivory Silk & Antique Gold (Luxury Light Edition) */
+[data-theme="ivory"] {
+  --color-bg-base: #faf7f2;
+  --color-bg-surface: #f3ede2;
+  --color-bg-card: #e8ded0;
+  --color-gradient-start: #dfceb7;
+  --color-gradient-mid: #f3ede2;
+  --color-gradient-end: #faf7f2;
+  --color-gold-light: #9a6f18;
+  --color-gold-mid: #b88628;
+  --color-gold-dark: #6e4e0f;
+  --color-gold-border: rgba(184, 134, 40, 0.45);
+  --color-gold-shadow: rgba(184, 134, 40, 0.2);
+  --color-text-main: #1f1a14;
+  --color-text-muted: #5e5447;
+  --color-text-subtle: #877a6a;
+}
+
+/* Font Variant: Royal Heritage Serif */
+[data-font="serif"] {
+  --font-calligraphy: 'Cinzel Decorative', 'Playfair Display', serif;
+}
+
+/* Font Variant: Aristocratic Script */
+[data-font="script"] {
+  --font-calligraphy: 'Pinyon Script', cursive;
+}
+
+/* Font Variant: Haute Couture Editorial */
+[data-font="modern"] {
+  --font-calligraphy: 'Playfair Display', serif;
+}
+
+/* Font Variant: Classic Flourish Brush */
+[data-font="brush"] {
+  --font-calligraphy: 'Alex Brush', cursive;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-base);
+  color: var(--color-text-main);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Custom Font Utilities */
+.font-calligraphy {
+  font-family: var(--font-calligraphy);
+}
+
+.font-cinzel {
+  font-family: var(--font-cinzel);
+}
+
+.font-cinzel-dec {
+  font-family: var(--font-cinzel-dec);
+}
+
+.font-garamond {
+  font-family: var(--font-serif);
+}
+
+.font-playfair {
+  font-family: var(--font-playfair);
+}
+
+.font-pinyon {
+  font-family: var(--font-pinyon);
+}
+
+/* Gold Gradient Text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--color-gold-light) 0%, var(--color-gold-mid) 40%, var(--color-gold-dark) 75%, var(--color-gold-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+}
+
+.text-gold-light {
+  background: linear-gradient(135deg, #ffffff 0%, var(--color-gold-light) 40%, var(--color-gold-mid) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated Golden Shimmer */
+@keyframes luxuryShine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.text-gold-shine {
+  background: linear-gradient(
+    90deg,
+    var(--color-gold-mid) 0%,
+    var(--color-gold-light) 25%,
+    #ffffff 50%,
+    var(--color-gold-light) 75%,
+    var(--color-gold-mid) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: luxuryShine 6s linear infinite;
+}
+
+/* Dynamic Gradients and Backgrounds */
+.bg-peacock-gradient, .bg-wedding-gradient {
+  background: radial-gradient(circle at center, var(--color-gradient-start) 0%, var(--color-gradient-mid) 60%, var(--color-gradient-end) 100%);
+}
+
+.border-gold {
+  border-color: var(--color-gold-border);
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, var(--color-gold-mid) 0%, var(--color-gold-dark) 50%, var(--color-gold-light) 100%);
+}
+
+.bg-card-ivory {
+  background-color: #fdfbf7;
+  background-image: radial-gradient(#e5e7eb 0.75px, transparent 0.75px), radial-gradient(#e5e7eb 0.75px, #fdfbf7 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+/* Metallic Shimmer Animation */
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(225, 190, 101, 0.2) 0%,
+    rgba(254, 244, 207, 0.8) 50%,
+    rgba(225, 190, 101, 0.2) 100%
+  );
+  background-size: 200% 100%;
+  animation: goldShimmer 4s infinite linear;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-gold-mid), var(--color-gradient-start));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-light);
+}
