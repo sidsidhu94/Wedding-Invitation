@@ -1,71 +1,55 @@
-/**
- * Central Data File for Sidharth Pankajakshan & Anjusha M Wedding Invitation
- * 
- * IMPORTANT: Text copied EXACTLY from the physical wedding invitation card.
- * DO NOT modify spellings, names, addresses, venues, dates, or times.
- */
-
 const weddingData = {
   groom: {
     name: "Sidharth Pankajakshan",
     shortName: "Sidharth",
-    family: "Smt. Swapna Pankajakshan & Sri V K Pankajakshan",
-    parents: "Smt. Swapna Pankajakshan & Sri V K Pankajakshan",
-    address: "Devaki, ENORA House No. 50, Podikundu, P.O. Palikunnu, Kannur - 670004",
+    family: "S/o. Mr. V.K. Pankajakshan & Mrs. Swapna Pankajakshan",
+    parents: "Mr. V.K. Pankajakshan & Mrs. Swapna Pankajakshan",
+    address: "'Devaki', Enora 50, Podikundu P.O., Pallikunnu, Kannur 670004",
     addressLines: [
-      "Devaki, ENORA House No. 50,",
-      "Podikundu, P.O. Palikunnu, Kannur - 670004"
-    ],
-    mobile: "9446835890 / 9072212677",
-    mobiles: ["9446835890", "9072212677"],
-    lineage1: "Grand S/o. Late Sri Nittu Kanjoora Kanaran Master & Late Smt. Vallapile Kandy Devaki",
-    lineage2: "Grand S/o. Late Sri Uppot Chamkali Sreedharan & Late Smt. Choyyan Poothatta Sreermathi (Panakada)"
+      "'Devaki', Enora 50, Podikundu P.O.",
+      "Pallikunnu, Kannur 670004"
+    ]
   },
-
   bride: {
     name: "Anjusha M",
     shortName: "Anjusha",
-    family: "D/o. Smt. Pushpavalli K & Sri Ambujakshan M",
-    parents: "D/o. Smt. Pushpavalli K & Sri Ambujakshan M",
-    address: "Malangi House, P.O. Nekraje, Kasaragod - 671543",
+    family: "D/o. Mr. Ambujakshan M & Mrs. Pushpavalli K",
+    parents: "Mr. Ambujakshan M & Mrs. Pushpavalli K",
+    address: "Malangai House, Nekraje P.O., Kasaragod",
     addressLines: [
-      "Malangi House, P.O. Nekraje, Kasaragod - 671543"
-    ]
+      "Malangai House, Nekraje P.O., Kasaragod"
+    ],
+    mobile: "9061437409 / 9495145774",
+    mobiles: ["9061437409", "9495145774"]
   },
-
   invitationText: {
-    greeting: "Cordi ally invite you and your family",
+    greeting: "Cordially invite your esteemed presence with family",
     occasion: "on the auspicious occasion of the",
-    eventTitle: "WEDDING RECEPTION OF OUR SON"
+    eventTitle: "PRE-WEDDING RECEPTION"
   },
-
   wedding: {
     title: "WEDDING",
     date: "Sunday, 18th October 2026",
     rawDate: "2026-10-18T11:25:00+05:30",
-    muhurtham: "between 11-25 a.m. to 12-25 p.m.",
+    muhurtham: "between 11.25 am to 12.25 pm",
     venue: "Karakkakavu Auditorium",
-    location: "Kalikkadavu, Kasaragod",
-    // Configurable Google Maps URL (as specified in prompt rules)
-    mapUrl: "https://maps.google.com/?q=Karakkakavu+Auditorium+Kalikkadavu+Kasaragod"
+    location: "Kalikkadavu",
+    mapUrl: "https://maps.google.com/?q=Karakkakavu+Auditorium+Kalikkadavu"
   },
-
   reception: {
-    title: "RECEPTION",
-    date: "MON | 19 | OCT",
-    day: "MON",
-    dateNum: "19",
+    title: "PRE-WEDDING RECEPTION",
+    date: "FRI | 16 | OCT",
+    day: "FRI",
+    dateNum: "16",
     month: "OCT",
     year: "2026",
     time: "6:00 PM to 9:00 PM",
-    venue: "Exora Conventions",
-    location: "Talap",
-    // Configurable Google Maps URL
-    mapUrl: "https://maps.google.com/?q=Exora+Conventions+Talap+Kannur"
+    venue: "Bride's Residence",
+    location: "Nekraje, Kasaragod",
+    mapUrl: "https://maps.app.goo.gl/v3pajVgHFih3v5kx5?g_st=aw"
   },
-
-  compliments: "Arjun Pankajakshan",
-  blessingNote: "Kindly grace the occasion with your blessings only"
+  compliments: "Anoha & Ahaan",
+  blessingNote: "PRESENTS IN BLESSINGS ONLY"
 };
 
 export default weddingData;

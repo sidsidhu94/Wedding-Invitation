@@ -13,8 +13,8 @@ const Footer = () => {
         </div>
 
         {/* Monogram / Names */}
-        <h3 className="font-calligraphy text-4xl md:text-5xl text-gold-gradient font-bold">
-          {weddingData.groom.shortName} <span className="text-[var(--color-gold-mid)] font-serif text-2xl">&</span> {weddingData.bride.shortName}
+        <h3 className="font-brush text-4xl md:text-5xl text-gold-gradient font-normal">
+          {weddingData.bride.shortName} <span className="text-[var(--color-gold-mid)] font-serif text-2xl">&</span> {weddingData.groom.shortName}
         </h3>
 
         <p className="font-cinzel text-xs text-[var(--color-gold-light)]/80 tracking-widest uppercase">

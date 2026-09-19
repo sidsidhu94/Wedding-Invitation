@@ -5,39 +5,46 @@ import Invitation from './components/Invitation';
 import WeddingEvent from './components/WeddingEvent';
 import Countdown from './components/Countdown';
 import ReceptionEvent from './components/ReceptionEvent';
-import FamilyDetails from './components/FamilyDetails';
 import Venue from './components/Venue';
 import Blessings from './components/Blessings';
 import MusicPlayer from './components/MusicPlayer';
 import Footer from './components/Footer';
 
-// Handcrafted Royal Envelope & Velvet Curtain Raiser Ceremony
-import EnvelopeOpening from './components/EnvelopeOpening';
+// Bespoke Royal Keepsake Gift Box Opening
+import GiftBoxOpening from './components/openings/GiftBoxOpening';
 
 function App() {
-  const [envelopeOpened, setEnvelopeOpened] = useState(false);
+  const [invitationOpened, setInvitationOpened] = useState(false);
   const [replayCount, setReplayCount] = useState(0);
   const [autoPlayMusic, setAutoPlayMusic] = useState(false);
 
-  const handleEnvelopeOpen = () => {
-    setEnvelopeOpened(true);
+  const handleInviteStart = () => {
     setAutoPlayMusic(true);
   };
 
-  const handleReplayEnvelope = () => {
+  const handleInviteOpen = () => {
+    setInvitationOpened(true);
+    setAutoPlayMusic(true);
+  };
+
+  const handleReplayInvite = () => {
     setReplayCount((c) => c + 1);
-    setEnvelopeOpened(false);
+    setInvitationOpened(false);
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg-base,#041a13)] text-[var(--color-text-main,#fbf9f5)] selection:bg-amber-500 selection:text-slate-950 transition-colors duration-500">
-      {/* Handcrafted Royal Envelope & Velvet Curtain Raiser Overlay */}
-      {!envelopeOpened && (
-        <EnvelopeOpening key={replayCount} onOpen={handleEnvelopeOpen} />
+    <div className="min-h-screen bg-[var(--color-bg-base,#1f040a)] text-[var(--color-text-main,#fcf4f6)] selection:bg-amber-400 selection:text-slate-950 transition-colors duration-500">
+      {/* Royal Keepsake Gift Box Opening Ceremony */}
+      {!invitationOpened && (
+        <GiftBoxOpening
+          key={replayCount}
+          onStartOpen={handleInviteStart}
+          onOpen={handleInviteOpen}
+        />
       )}
 
       {/* Sticky Navigation Bar */}
-      <Navbar onReplayInvite={handleReplayEnvelope} />
+      <Navbar onReplayInvite={handleReplayInvite} />
 
       {/* Main Single Page Wedding Invitation Sections */}
       <main>
@@ -46,7 +53,6 @@ function App() {
         <WeddingEvent />
         <Countdown />
         <ReceptionEvent />
-        <FamilyDetails />
         <Venue />
         <Blessings />
       </main>
@@ -54,7 +60,7 @@ function App() {
       {/* Floating Audio Vinyl Sound Engine */}
       <MusicPlayer
         autoPlayTrigger={autoPlayMusic}
-        onReplayEnvelope={handleReplayEnvelope}
+        onReplayEnvelope={handleReplayInvite}
       />
 
       {/* Footer */}

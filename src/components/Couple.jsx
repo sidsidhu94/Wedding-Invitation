@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Sparkles, Camera, Upload, Check } from 'lucide-react';
+import { Heart, Sparkles, Camera } from 'lucide-react';
 import weddingData from '../data/weddingData';
 import PeacockFeather from './decorations/PeacockFeather';
 
@@ -8,7 +8,7 @@ import PeacockFeather from './decorations/PeacockFeather';
 import defaultGroomImg from '../assets/groom.png';
 import defaultBrideImg from '../assets/bride.png';
 
-const Couple = ({ activeTheme }) => {
+const Couple = () => {
   const [groomPhoto, setGroomPhoto] = useState(defaultGroomImg);
   const [bridePhoto, setBridePhoto] = useState(defaultBrideImg);
   const [showPhotoUploader, setShowPhotoUploader] = useState(false);

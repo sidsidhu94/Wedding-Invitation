@@ -23,7 +23,6 @@ const Navbar = ({ onReplayInvite }) => {
     { label: 'Invitation', href: '#invitation' },
     { label: 'Wedding', href: '#wedding' },
     { label: 'Reception', href: '#reception' },
-    { label: 'Family', href: '#family' },
     { label: 'Venue', href: '#venue' },
     { label: 'Blessings', href: '#blessings' },
   ];
@@ -50,13 +49,13 @@ const Navbar = ({ onReplayInvite }) => {
         <a 
           href="#hero" 
           onClick={(e) => handleNavClick(e, '#hero')}
-          className="flex items-center gap-2 group"
+          className="flex items-center gap-2.5 group"
         >
-          <div className="w-9 h-9 rounded-full border border-[var(--color-gold-border)] flex items-center justify-center bg-[#0c3529] group-hover:border-amber-300 transition-colors">
-            <span className="font-cinzel text-amber-300 font-bold text-sm tracking-wider">S&A</span>
+          <div className="w-9 h-9 rounded-full border border-[var(--color-gold-border)] flex items-center justify-center bg-[var(--color-bg-card)] group-hover:border-[var(--color-gold-mid)] transition-colors shadow-sm">
+            <span className="font-cinzel text-[var(--color-gold-mid)] font-bold text-sm tracking-wider">A&S</span>
           </div>
-          <span className="font-cinzel text-amber-200/90 text-sm hidden sm:inline-block tracking-widest uppercase">
-            Sidharth <span className="text-amber-400">&</span> Anjusha
+          <span className="font-cinzel text-[var(--color-gold-light)]/90 text-sm hidden sm:inline-block tracking-widest uppercase">
+            Anjusha <span className="text-[var(--color-gold-mid)]">&</span> Sidharth
           </span>
         </a>
 
@@ -67,7 +66,7 @@ const Navbar = ({ onReplayInvite }) => {
               key={item.label}
               href={item.href}
               onClick={(e) => handleNavClick(e, item.href)}
-              className="text-xs uppercase tracking-wider text-stone-300 hover:text-amber-300 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-amber-400 hover:after:w-full after:transition-all after:duration-300"
+              className="text-xs uppercase tracking-wider text-stone-300 hover:text-[var(--color-gold-mid)] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-[var(--color-gold-mid)] hover:after:w-full after:transition-all after:duration-300 font-cinzel font-medium"
             >
               {item.label}
             </a>
@@ -80,17 +79,17 @@ const Navbar = ({ onReplayInvite }) => {
             <button
               onClick={onReplayInvite}
               className="px-3.5 py-1.5 text-xs uppercase tracking-wider font-cinzel rounded-full bg-[var(--color-bg-card)]/80 hover:bg-[var(--color-gold-mid)]/20 border border-[var(--color-gold-border)] text-[var(--color-gold-light)] hover:border-[var(--color-gold-mid)] transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
-              title="Replay Envelope & Curtain Raiser Ceremony"
+              title="Replay Royal Gift Box Opening"
             >
-              <span className="text-amber-400 text-sm leading-none">✉</span>
-              <span className="text-[11px]">Replay Invite</span>
+              <span className="text-sm leading-none">🎁</span>
+              <span className="text-[11px]">Replay Opening</span>
             </button>
           )}
 
           {/* Hamburger Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-stone-300 hover:text-amber-300 focus:outline-none cursor-pointer"
+            className="md:hidden p-2 text-stone-300 hover:text-[var(--color-gold-mid)] focus:outline-none cursor-pointer"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -108,12 +107,12 @@ const Navbar = ({ onReplayInvite }) => {
                   setMobileMenuOpen(false);
                   onReplayInvite();
                 }}
-                className="text-left text-sm uppercase tracking-widest text-amber-300 py-2 border-b border-stone-800 flex items-center justify-between cursor-pointer"
+                className="text-left text-sm uppercase tracking-widest text-[var(--color-gold-light)] py-2 border-b border-stone-800 flex items-center justify-between cursor-pointer"
               >
                 <span className="flex items-center gap-2">
-                  <span>✉</span> Replay Invitation Ceremony
+                  <span className="text-[var(--color-gold-mid)]">✉</span> Replay Invitation Ceremony
                 </span>
-                <span className="text-amber-400 text-xs">✦</span>
+                <span className="text-[var(--color-gold-mid)] text-xs">✦</span>
               </button>
             )}
             {navItems.map((item) => (
@@ -121,10 +120,10 @@ const Navbar = ({ onReplayInvite }) => {
                 key={item.label}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="text-sm uppercase tracking-widest text-stone-200 hover:text-amber-300 py-2 border-b border-stone-800 flex items-center justify-between"
+                className="text-sm uppercase tracking-widest text-stone-200 hover:text-[var(--color-gold-mid)] py-2 border-b border-stone-800 flex items-center justify-between font-cinzel"
               >
                 <span>{item.label}</span>
-                <span className="text-amber-400 text-xs">✦</span>
+                <span className="text-[var(--color-gold-mid)] text-xs">✦</span>
               </a>
             ))}
           </div>

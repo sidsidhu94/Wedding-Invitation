@@ -1,47 +1,51 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-
-export const THEMES = [
-  {
-    id: 'emerald',
-    name: 'Royal Emerald & Gold',
-    description: 'Traditional South Indian & Kerala Temple Aesthetic',
-    badge: 'Kerala Traditional',
-    swatches: ['#041a13', '#0c3529', '#e1be65'],
-  },
-];
-
-export const FONTS = [
-  {
-    id: 'brush',
-    name: 'Romantic Flourish Brush',
-    subtitle: 'Alex Brush Romance Script',
-    preview: 'Sidharth & Anjusha',
-    className: 'font-calligraphy',
-    badge: 'Selected',
-  },
-];
-
-const ThemeContext = createContext();
+import React, { useState, useEffect } from 'react';
+import { THEMES, FONTS, OPENING_CEREMONIES } from '../data/themeConstants';
+import { ThemeContext } from './ThemeContextCore';
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('emerald');
-  const [font, setFont] = useState('brush');
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('wedding-theme-v4') || 'burgundy';
+  });
+
+  const [font, setFont] = useState(() => {
+    return localStorage.getItem('wedding-font-v4') || 'brush';
+  });
+
+  const [ceremony, setCeremony] = useState(() => {
+    return localStorage.getItem('wedding-ceremony-v4') || 'giftbox';
+  });
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', 'emerald');
-    localStorage.setItem('wedding-theme', 'emerald');
-  }, []);
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('wedding-theme-v4', theme);
+  }, [theme]);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-font', 'brush');
-    localStorage.setItem('wedding-font', 'brush');
-  }, []);
+    document.documentElement.setAttribute('data-font', font);
+    localStorage.setItem('wedding-font-v4', font);
+  }, [font]);
+
+  useEffect(() => {
+    localStorage.setItem('wedding-ceremony-v4', ceremony);
+  }, [ceremony]);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, font, setFont, THEMES, FONTS }}>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        setTheme,
+        font,
+        setFont,
+        ceremony,
+        setCeremony,
+        THEMES,
+        FONTS,
+        OPENING_CEREMONIES,
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   );
 };
 
-export const useTheme = () => useContext(ThemeContext);
+

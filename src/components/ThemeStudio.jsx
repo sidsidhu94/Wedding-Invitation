@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Palette, Type, Check, X, Sparkles } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
-
+import { useTheme } from '../context/useTheme';
 const ThemeStudio = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, setTheme, font, setFont, THEMES, FONTS } = useTheme();
+  const {
+    theme,
+    setTheme,
+    font,
+    setFont,
+    ceremony,
+    setCeremony,
+    THEMES,
+    FONTS,
+    OPENING_CEREMONIES,
+  } = useTheme();
 
   return (
     <>
@@ -130,7 +139,59 @@ const ThemeStudio = () => {
                   </div>
                 </div>
 
-                {/* 2. Typography Styles */}
+                {/* 2. Opening Ceremonies */}
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="font-cinzel text-xs uppercase tracking-widest text-[var(--color-gold-light)] font-bold flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-[var(--color-gold-mid)]" />
+                      Grand Opening Ceremony
+                    </span>
+                    <span className="text-[10px] text-[var(--color-text-muted)] font-garamond italic">
+                      Choose your favorite entrance
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {OPENING_CEREMONIES.map((c) => {
+                      const isSelected = ceremony === c.id;
+                      return (
+                        <button
+                          key={c.id}
+                          onClick={() => setCeremony(c.id)}
+                          className={`group text-left p-3 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
+                            isSelected
+                              ? 'border-[var(--color-gold-mid)] bg-[var(--color-bg-card)] shadow-lg ring-1 ring-[var(--color-gold-mid)]'
+                              : 'border-white/10 hover:border-[var(--color-gold-border)] hover:bg-white/5 bg-[var(--color-bg-base)]/60'
+                          }`}
+                        >
+                          <div className="flex items-start justify-between mb-1.5">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xl">{c.emoji}</span>
+                              <div>
+                                <p className="font-cinzel text-xs font-semibold text-[var(--color-text-main)]">
+                                  {c.shortName}
+                                </p>
+                                <span className="text-[10px] px-1.5 py-0.2 rounded bg-[var(--color-gold-mid)]/15 text-[var(--color-gold-light)] font-cinzel">
+                                  {c.badge}
+                                </span>
+                              </div>
+                            </div>
+                            {isSelected && (
+                              <div className="w-4 h-4 rounded-full bg-[var(--color-gold-mid)] text-black flex items-center justify-center shrink-0 ml-1">
+                                <Check className="w-2.5 h-2.5 stroke-[3]" />
+                              </div>
+                            )}
+                          </div>
+                          <p className="text-[10px] font-garamond text-[var(--color-text-muted)] mt-1 line-clamp-2">
+                            {c.description}
+                          </p>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* 3. Typography Styles */}
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <span className="font-cinzel text-xs uppercase tracking-widest text-[var(--color-gold-light)] font-bold flex items-center gap-1.5">

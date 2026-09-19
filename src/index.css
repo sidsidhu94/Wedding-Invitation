@@ -1,33 +1,133 @@
 @import "tailwindcss";
 
 :root {
-  /* Default Typography */
+  /* Flagship Default: Imperial Kanjeevaram Crimson & Antique Molten Gold */
   --font-calligraphy: 'Alex Brush', cursive;
+  --font-brush: 'Alex Brush', cursive;
   --font-cinzel: 'Cinzel', serif;
   --font-cinzel-dec: 'Cinzel Decorative', serif;
   --font-serif: 'Cormorant Garamond', serif;
   --font-playfair: 'Playfair Display', serif;
   --font-pinyon: 'Pinyon Script', cursive;
+  --font-montecarlo: 'MonteCarlo', cursive;
+  --font-italianno: 'Italianno', cursive;
+  --font-bodoni: 'Bodoni Moda', serif;
   --font-sans: 'Plus Jakarta Sans', sans-serif;
 
-  /* Default Theme: Royal Emerald & Warm Antique Gold */
-  --color-bg-base: #041a13;
-  --color-bg-surface: #07261d;
-  --color-bg-card: #0c3529;
-  --color-gradient-start: #0f4636;
-  --color-gradient-mid: #07261d;
-  --color-gradient-end: #041a13;
-  --color-gold-light: #fef4cf;
-  --color-gold-mid: #e1be65;
-  --color-gold-dark: #b38b34;
-  --color-gold-border: rgba(225, 190, 101, 0.45);
-  --color-gold-shadow: rgba(225, 190, 101, 0.25);
-  --color-text-main: #fbf9f5;
-  --color-text-muted: #d4cfc3;
-  --color-text-subtle: #9ea7a1;
+  /* Imperial Crimson & Royal Velvet Wine Palette */
+  --color-bg-base: #1f040a;
+  --color-bg-surface: #2d0710;
+  --color-bg-card: #380813;
+  --color-gradient-start: #4a0c1a;
+  --color-gradient-mid: #2d0710;
+  --color-gradient-end: #1f040a;
+  
+  /* Antique Molten Gold & Champagne Blush */
+  --color-gold-light: #fef0cb;
+  --color-gold-mid: #dfbd69;
+  --color-gold-dark: #b56f4d;
+  --color-gold-border: rgba(223, 189, 105, 0.5);
+  --color-gold-shadow: rgba(223, 189, 105, 0.25);
+  
+  --color-text-main: #fcf4f6;
+  --color-text-muted: #e4cbcf;
+  --color-text-subtle: #ab8f95;
+
+  /* Curtains / Backdrop Drapery Colors */
+  --color-curtain-start: #4a0c1a;
+  --color-curtain-mid: #380813;
+  --color-curtain-dark: #1f040a;
 }
 
-/* Theme: Royal Emerald & Antique Gold (Traditional South Indian / Kerala Royal) */
+/* Option A: Royal Burgundy & Rose Gold */
+[data-theme="burgundy"] {
+  --color-bg-base: #1f040a;
+  --color-bg-surface: #2d0710;
+  --color-bg-card: #380813;
+  --color-gradient-start: #4a0c1a;
+  --color-gradient-mid: #2d0710;
+  --color-gradient-end: #1f040a;
+  --color-gold-light: #fcf4f6;
+  --color-gold-mid: #e5a882;
+  --color-gold-dark: #b56f4d;
+  --color-gold-border: rgba(229, 168, 130, 0.45);
+  --color-gold-shadow: rgba(229, 168, 130, 0.25);
+  --color-text-main: #fcf4f6;
+  --color-text-muted: #e4cbcf;
+  --color-text-subtle: #ab8f95;
+  --color-curtain-start: #4a0c1a;
+  --color-curtain-mid: #380813;
+  --color-curtain-dark: #1f040a;
+  --font-calligraphy: 'Pinyon Script', cursive;
+}
+
+/* Option B: Midnight Sapphire & Celestial Gold */
+[data-theme="sapphire"] {
+  --color-bg-base: #060b17;
+  --color-bg-surface: #0e1b38;
+  --color-bg-card: #142750;
+  --color-gradient-start: #1c3670;
+  --color-gradient-mid: #0e1b38;
+  --color-gradient-end: #060b17;
+  --color-gold-light: #fef4cf;
+  --color-gold-mid: #dfbd69;
+  --color-gold-dark: #b08d3b;
+  --color-gold-border: rgba(223, 189, 105, 0.45);
+  --color-gold-shadow: rgba(223, 189, 105, 0.25);
+  --color-text-main: #f8fafc;
+  --color-text-muted: #cbd5e1;
+  --color-text-subtle: #8fa0b5;
+  --color-curtain-start: #1c3670;
+  --color-curtain-mid: #0e1b38;
+  --color-curtain-dark: #060b17;
+  --font-calligraphy: 'MonteCarlo', cursive;
+}
+
+/* Option C: Heritage Plum & Antique Gold */
+[data-theme="plum"] {
+  --color-bg-base: #150522;
+  --color-bg-surface: #290d42;
+  --color-bg-card: #3d1461;
+  --color-gradient-start: #551d85;
+  --color-gradient-mid: #290d42;
+  --color-gradient-end: #150522;
+  --color-gold-light: #faf5fc;
+  --color-gold-mid: #e2be64;
+  --color-gold-dark: #b59238;
+  --color-gold-border: rgba(226, 190, 100, 0.45);
+  --color-gold-shadow: rgba(226, 190, 100, 0.25);
+  --color-text-main: #faf5fc;
+  --color-text-muted: #d9cedd;
+  --color-text-subtle: #a192a6;
+  --color-curtain-start: #551d85;
+  --color-curtain-mid: #290d42;
+  --color-curtain-dark: #150522;
+  --font-calligraphy: 'Cinzel Decorative', serif;
+}
+
+/* Option D: Ivory Silk & Tuscan Bronze */
+[data-theme="ivory"] {
+  --color-bg-base: #faf7f2;
+  --color-bg-surface: #f1e9dc;
+  --color-bg-card: #e4d8c5;
+  --color-gradient-start: #d6c3a7;
+  --color-gradient-mid: #f1e9dc;
+  --color-gradient-end: #faf7f2;
+  --color-gold-light: #4a3b2c;
+  --color-gold-mid: #b88628;
+  --color-gold-dark: #7a5513;
+  --color-gold-border: rgba(184, 134, 40, 0.45);
+  --color-gold-shadow: rgba(184, 134, 40, 0.2);
+  --color-text-main: #2b2219;
+  --color-text-muted: #5e5142;
+  --color-text-subtle: #877764;
+  --color-curtain-start: #4a3b2c;
+  --color-curtain-mid: #68533e;
+  --color-curtain-dark: #2f251b;
+  --font-calligraphy: 'Italianno', cursive;
+}
+
+/* Traditional Kerala Emerald & Gold */
 [data-theme="emerald"] {
   --color-bg-base: #041a13;
   --color-bg-surface: #07261d;
@@ -43,96 +143,28 @@
   --color-text-main: #fbf9f5;
   --color-text-muted: #d4cfc3;
   --color-text-subtle: #9ea7a1;
-}
-
-/* Theme: Burgundy Wine & Imperial Gold (Regal Romance) */
-[data-theme="burgundy"] {
-  --color-bg-base: #18050e;
-  --color-bg-surface: #270916;
-  --color-bg-card: #3c0f24;
-  --color-gradient-start: #4d132e;
-  --color-gradient-mid: #270916;
-  --color-gradient-end: #18050e;
-  --color-gold-light: #fef2d2;
-  --color-gold-mid: #e5be64;
-  --color-gold-dark: #b78a2e;
-  --color-gold-border: rgba(229, 190, 100, 0.45);
-  --color-gold-shadow: rgba(229, 190, 100, 0.25);
-  --color-text-main: #fcf9f9;
-  --color-text-muted: #e0d0d5;
-  --color-text-subtle: #a8949b;
-}
-
-/* Theme: Midnight Sapphire & Celestial Gold (Deep Majestic Blue) */
-[data-theme="sapphire"] {
-  --color-bg-base: #060b17;
-  --color-bg-surface: #0c162c;
-  --color-bg-card: #132244;
-  --color-gradient-start: #1c3263;
-  --color-gradient-mid: #0c162c;
-  --color-gradient-end: #060b17;
-  --color-gold-light: #fef7db;
-  --color-gold-mid: #e0c274;
-  --color-gold-dark: #b08d3b;
-  --color-gold-border: rgba(224, 194, 116, 0.45);
-  --color-gold-shadow: rgba(224, 194, 116, 0.25);
-  --color-text-main: #f8fafc;
-  --color-text-muted: #cbd5e1;
-  --color-text-subtle: #8fa0b5;
-}
-
-/* Theme: Imperial Velvet Plum & Crown Gold */
-[data-theme="plum"] {
-  --color-bg-base: #12051b;
-  --color-bg-surface: #200a2e;
-  --color-bg-card: #311145;
-  --color-gradient-start: #431760;
-  --color-gradient-mid: #200a2e;
-  --color-gradient-end: #12051b;
-  --color-gold-light: #fff2d2;
-  --color-gold-mid: #dfbd69;
-  --color-gold-dark: #b18c35;
-  --color-gold-border: rgba(223, 189, 105, 0.45);
-  --color-gold-shadow: rgba(223, 189, 105, 0.25);
-  --color-text-main: #fbf8fc;
-  --color-text-muted: #d9cedd;
-  --color-text-subtle: #a192a6;
-}
-
-/* Theme: Ivory Silk & Antique Gold (Luxury Light Edition) */
-[data-theme="ivory"] {
-  --color-bg-base: #faf7f2;
-  --color-bg-surface: #f3ede2;
-  --color-bg-card: #e8ded0;
-  --color-gradient-start: #dfceb7;
-  --color-gradient-mid: #f3ede2;
-  --color-gradient-end: #faf7f2;
-  --color-gold-light: #9a6f18;
-  --color-gold-mid: #b88628;
-  --color-gold-dark: #6e4e0f;
-  --color-gold-border: rgba(184, 134, 40, 0.45);
-  --color-gold-shadow: rgba(184, 134, 40, 0.2);
-  --color-text-main: #1f1a14;
-  --color-text-muted: #5e5447;
-  --color-text-subtle: #877a6a;
-}
-
-/* Font Variant: Royal Heritage Serif */
-[data-font="serif"] {
-  --font-calligraphy: 'Cinzel Decorative', 'Playfair Display', serif;
-}
-
-/* Font Variant: Aristocratic Script */
-[data-font="script"] {
+  --color-curtain-start: #0f4636;
+  --color-curtain-mid: #07261d;
+  --color-curtain-dark: #041a13;
   --font-calligraphy: 'Pinyon Script', cursive;
 }
 
-/* Font Variant: Haute Couture Editorial */
+/* Dynamic Typography Variant Overrides */
+[data-font="pinyon"] {
+  --font-calligraphy: 'Pinyon Script', cursive;
+}
+[data-font="montecarlo"] {
+  --font-calligraphy: 'MonteCarlo', cursive;
+}
+[data-font="italianno"] {
+  --font-calligraphy: 'Italianno', cursive;
+}
+[data-font="serif"] {
+  --font-calligraphy: 'Cinzel Decorative', 'Playfair Display', serif;
+}
 [data-font="modern"] {
   --font-calligraphy: 'Playfair Display', serif;
 }
-
-/* Font Variant: Classic Flourish Brush */
 [data-font="brush"] {
   --font-calligraphy: 'Alex Brush', cursive;
 }
@@ -147,6 +179,10 @@ body {
 /* Custom Font Utilities */
 .font-calligraphy {
   font-family: var(--font-calligraphy);
+}
+
+.font-brush {
+  font-family: var(--font-brush);
 }
 
 .font-cinzel {
@@ -167,6 +203,18 @@ body {
 
 .font-pinyon {
   font-family: var(--font-pinyon);
+}
+
+.font-montecarlo {
+  font-family: var(--font-montecarlo);
+}
+
+.font-italianno {
+  font-family: var(--font-italianno);
+}
+
+.font-bodoni {
+  font-family: var(--font-bodoni);
 }
 
 /* Gold Gradient Text */

@@ -1,10 +1,10 @@
 export const TRACKS = [
   {
-    id: 'en-jeevan',
-    title: 'En Jeevan (Vaikom Vijayalakshmi)',
-    subtitle: 'Soulful Romantic Wedding Melody',
-    src: '/audio/en-jeevan.m4a',
-    tag: 'Romantic'
+    id: 'sita-kalyanam',
+    title: 'Seetha Kalyanam (Solo Melody)',
+    subtitle: 'Traditional Divine Wedding Music',
+    src: '/audio/sita-kalyanam.m4a',
+    tag: 'Traditional'
   }
 ];
 

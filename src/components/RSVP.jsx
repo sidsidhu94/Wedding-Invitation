@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Send, CheckCircle2, Heart, X, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Send, CheckCircle2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
-const RSVP = ({ isOpen, onClose }) => {
+const RSVP = ({ onClose }) => {
   const [formData, setFormData] = useState({
     name: '',
     guests: '1',

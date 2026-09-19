@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Volume2, VolumeX, Music, Play, Pause, ChevronUp, Mail } from 'lucide-react';
+import { Volume2, VolumeX, Music, Play, Pause, ChevronUp, Gift } from 'lucide-react';
 import TRACKS from '../data/musicTracks';
 
 const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
@@ -20,7 +20,8 @@ const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
     
     if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
     
-    audio.volume = 0;
+    // Set initial volume and play immediately within user gesture
+    audio.volume = 0.1;
     const playPromise = audio.play();
     
     if (playPromise !== undefined) {
@@ -28,7 +29,7 @@ const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
         .then(() => {
           setIsPlaying(true);
           const targetVol = isMuted ? 0 : volume;
-          let currentVol = 0;
+          let currentVol = 0.1;
           const step = Math.max(0.04, targetVol / 15);
           
           fadeIntervalRef.current = setInterval(() => {
@@ -37,37 +38,25 @@ const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
             if (currentVol >= targetVol) {
               clearInterval(fadeIntervalRef.current);
             }
-          }, 100);
+          }, 80);
         })
         .catch((e) => {
-          console.log('Autoplay gesture required:', e);
+          console.log('Audio play error:', e);
         });
     }
   }, [isMuted, volume]);
 
-  // Initialize audio once
+  // Expose global play trigger so opening click directly triggers playback
   useEffect(() => {
-    const audio = new Audio();
-    audio.src = currentTrack.src;
-    audio.loop = true;
-    audio.volume = 0.75;
-    audioRef.current = audio;
-
-    const onPlay = () => setIsPlaying(true);
-    const onPause = () => setIsPlaying(false);
-
-    audio.addEventListener('play', onPlay);
-    audio.addEventListener('pause', onPause);
-
+    window.__playWeddingMusic = fadeInAndPlay;
+    const handleCustomPlay = () => fadeInAndPlay();
+    window.addEventListener('play-wedding-music', handleCustomPlay);
     return () => {
+      delete window.__playWeddingMusic;
+      window.removeEventListener('play-wedding-music', handleCustomPlay);
       if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
-      audio.removeEventListener('play', onPlay);
-      audio.removeEventListener('pause', onPause);
-      audio.pause();
-      audio.src = '';
-      audio.remove();
     };
-  }, [currentTrack.src]);
+  }, [fadeInAndPlay]);
 
   // Handle volume updates
   useEffect(() => {
@@ -76,7 +65,7 @@ const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
     }
   }, [volume, isMuted]);
 
-  // Trigger audio on autoPlayTrigger (e.g. envelope open)
+  // Trigger audio on autoPlayTrigger
   useEffect(() => {
     if (autoPlayTrigger) {
       fadeInAndPlay();
@@ -99,6 +88,18 @@ const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
 
   return (
     <div className="fixed bottom-6 left-5 z-40">
+      {/* Hidden Native Audio Element with Dual Source Fallback */}
+      <audio
+        ref={audioRef}
+        loop
+        preload="auto"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+      >
+        <source src="/audio/sita-kalyanam.m4a" type="audio/mp4" />
+        <source src="/audio/sita-kalyanam.webm" type="audio/webm" />
+      </audio>
+
       {/* Audio Panel Popup */}
       <AnimatePresence>
         {isExpanded && (
@@ -135,13 +136,13 @@ const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
             </div>
 
             {/* Currently Playing Card */}
-            <div className="p-3.5 rounded-2xl bg-[var(--color-bg-card,#0c3529)]/80 border border-[var(--color-gold-border,rgba(225,190,101,0.3))] flex items-center gap-3.5">
+            <div className="p-3.5 rounded-2xl bg-[var(--color-bg-card,#380813)]/80 border border-[var(--color-gold-border,rgba(223,189,105,0.3))] flex items-center gap-3.5">
               {/* Spinning Vinyl Indicator */}
               <div className="relative w-12 h-12 shrink-0">
                 <motion.div
                   animate={{ rotate: isPlaying ? 360 : 0 }}
                   transition={{ repeat: Infinity, duration: 4, ease: 'linear' }}
-                  className="w-full h-full rounded-full bg-gradient-to-tr from-slate-950 via-stone-900 to-amber-950 border-2 border-[var(--color-gold-mid,#e1be65)] shadow-md flex items-center justify-center"
+                  className="w-full h-full rounded-full bg-gradient-to-tr from-slate-950 via-stone-900 to-amber-950 border-2 border-[var(--color-gold-mid,#dfbd69)] shadow-md flex items-center justify-center"
                 >
                   <div className="w-4 h-4 rounded-full border border-amber-300/40 bg-amber-500/30 flex items-center justify-center">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold-light,#fef4cf)]" />
@@ -230,10 +231,10 @@ const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
                     setIsExpanded(false);
                     onReplayEnvelope();
                   }}
-                  className="w-full py-2.5 px-3 rounded-xl border border-[var(--color-gold-mid,#e1be65)]/40 bg-[var(--color-bg-card,#0c3529)]/60 hover:bg-[var(--color-gold-mid,#e1be65)]/20 text-[var(--color-gold-light,#fef4cf)] font-cinzel text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm"
+                  className="w-full py-2.5 px-3 rounded-xl border border-[var(--color-gold-mid)]/40 bg-[var(--color-bg-card)]/60 hover:bg-[var(--color-gold-mid)]/20 text-[var(--color-gold-light)] font-cinzel text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm"
                 >
-                  <Mail className="w-3.5 h-3.5 text-[var(--color-gold-mid,#e1be65)]" />
-                  <span>Replay Envelope & Curtain Ceremony</span>
+                  <Gift className="w-3.5 h-3.5 text-[var(--color-gold-mid)]" />
+                  <span>Replay Royal Gift Box Opening</span>
                 </button>
               </div>
             )}
@@ -247,10 +248,10 @@ const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
           whileHover={{ scale: 1.06 }}
           whileTap={{ scale: 0.94 }}
           onClick={togglePlay}
-          className={`relative p-3 rounded-full border-2 border-[var(--color-gold-mid,#e1be65)] backdrop-blur-xl shadow-[0_8px_25px_rgba(0,0,0,0.5)] transition-all flex items-center justify-center cursor-pointer ${
+          className={`relative p-3 rounded-full border-2 border-[var(--color-gold-mid,#e5a882)] backdrop-blur-xl shadow-[0_8px_25px_rgba(0,0,0,0.5)] transition-all flex items-center justify-center cursor-pointer ${
             isPlaying
-              ? 'bg-gradient-to-tr from-amber-600 via-amber-400 to-amber-500 text-slate-950 shadow-amber-500/30'
-              : 'bg-[var(--color-bg-surface,#07261d)]/95 text-[var(--color-gold-light,#fef4cf)] hover:bg-[var(--color-bg-card,#0c3529)]'
+              ? 'bg-gradient-to-tr from-rose-700 via-[#e5a882] to-amber-300 text-slate-950 shadow-rose-500/30'
+              : 'bg-[var(--color-bg-surface,#2d0710)]/95 text-[var(--color-gold-light,#fcf4f6)] hover:bg-[var(--color-bg-card,#380813)]'
           }`}
           title={isPlaying ? 'Pause Background Music' : 'Play Background Music'}
           aria-label="Toggle Wedding Music"
@@ -264,7 +265,7 @@ const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
             {isPlaying ? (
               <Music className="w-4 h-4 text-slate-950" />
             ) : (
-              <VolumeX className="w-4 h-4 text-[var(--color-gold-light,#fef4cf)]" />
+              <VolumeX className="w-4 h-4 text-[var(--color-gold-light,#fcf4f6)]" />
             )}
           </motion.div>
 
