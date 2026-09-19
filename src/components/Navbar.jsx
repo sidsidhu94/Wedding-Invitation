@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
-const Navbar = ({ onReplayInvite }) => {
+const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -75,17 +75,6 @@ const Navbar = ({ onReplayInvite }) => {
 
         {/* Action Button & Mobile Toggle */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {onReplayInvite && (
-            <button
-              onClick={onReplayInvite}
-              className="px-3.5 py-1.5 text-xs uppercase tracking-wider font-cinzel rounded-full bg-[var(--color-bg-card)]/80 hover:bg-[var(--color-gold-mid)]/20 border border-[var(--color-gold-border)] text-[var(--color-gold-light)] hover:border-[var(--color-gold-mid)] transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
-              title="Replay Royal Gift Box Opening"
-            >
-              <span className="text-sm leading-none">🎁</span>
-              <span className="text-[11px]">Replay Opening</span>
-            </button>
-          )}
-
           {/* Hamburger Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -101,20 +90,6 @@ const Navbar = ({ onReplayInvite }) => {
       {mobileMenuOpen && (
         <div className="md:hidden bg-[var(--color-bg-surface)]/95 backdrop-blur-lg border-b border-[var(--color-gold-border)] px-6 py-6 transition-all">
           <div className="flex flex-col gap-4">
-            {onReplayInvite && (
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onReplayInvite();
-                }}
-                className="text-left text-sm uppercase tracking-widest text-[var(--color-gold-light)] py-2 border-b border-stone-800 flex items-center justify-between cursor-pointer"
-              >
-                <span className="flex items-center gap-2">
-                  <span className="text-[var(--color-gold-mid)]">✉</span> Replay Invitation Ceremony
-                </span>
-                <span className="text-[var(--color-gold-mid)] text-xs">✦</span>
-              </button>
-            )}
             {navItems.map((item) => (
               <a
                 key={item.label}

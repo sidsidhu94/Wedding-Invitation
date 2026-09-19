@@ -43,8 +43,8 @@ function App() {
         />
       )}
 
-      {/* Sticky Navigation Bar */}
-      <Navbar onReplayInvite={handleReplayInvite} />
+      {/* Sticky Navigation Bar - Only shown after invitation is opened */}
+      {invitationOpened && <Navbar />}
 
       {/* Main Single Page Wedding Invitation Sections */}
       <main>

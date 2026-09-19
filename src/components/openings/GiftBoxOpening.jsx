@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, ArrowRight, Gift } from 'lucide-react';
+import { Sparkles, Gift } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import weddingData from '../../data/weddingData';
 import GaneshaHeader from '../decorations/GaneshaHeader';
@@ -44,17 +44,6 @@ export const GiftBoxOpening = ({ onOpen, onStartOpen }) => {
     }, 2200);
   };
 
-  const handleInstantSkip = () => {
-    if (typeof window !== 'undefined' && window.__playWeddingMusic) {
-      window.__playWeddingMusic();
-    }
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('play-wedding-music'));
-    }
-    setPhase('opened');
-    if (onOpen) onOpen();
-  };
-
   return (
     <AnimatePresence>
       {phase !== 'opened' && (
@@ -76,15 +65,6 @@ export const GiftBoxOpening = ({ onOpen, onStartOpen }) => {
             transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
             className="absolute w-[620px] h-[620px] rounded-full bg-gradient-to-tr from-rose-600/25 via-amber-500/20 to-transparent blur-3xl pointer-events-none"
           />
-
-          {/* Skip CTA */}
-          <button
-            onClick={handleInstantSkip}
-            className="absolute top-6 right-6 z-50 flex items-center gap-2 px-4 py-2 rounded-full bg-[#1f040a]/90 hover:bg-[#2d0710] text-amber-200 text-xs tracking-widest uppercase border border-amber-400/40 backdrop-blur-md transition-all shadow-lg hover:scale-105 active:scale-95 cursor-pointer"
-          >
-            <span>Skip Opening</span>
-            <ArrowRight className="w-3.5 h-3.5 text-amber-300" />
-          </button>
 
           {/* 3D Scene Wrapper */}
           <div className="relative z-10 flex flex-col items-center justify-center p-4 max-w-lg w-full [perspective:1400px]">
