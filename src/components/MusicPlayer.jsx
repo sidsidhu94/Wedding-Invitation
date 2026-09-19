@@ -1,32 +1,17 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Volume2, VolumeX, Music, Play, Pause, SkipForward, SkipBack, ChevronUp, Mail } from 'lucide-react';
+import { Volume2, VolumeX, Music, Play, Pause, ChevronUp, Mail } from 'lucide-react';
 import TRACKS from '../data/musicTracks';
 
 const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
   const [volume, setVolume] = useState(0.75);
   const [isMuted, setIsMuted] = useState(false);
   
   const audioRef = useRef(null);
   const fadeIntervalRef = useRef(null);
-  const isPlayingRef = useRef(false);
-  const currentTrack = TRACKS[currentTrackIndex];
-
-  // Keep isPlayingRef synced
-  useEffect(() => {
-    isPlayingRef.current = isPlaying;
-  }, [isPlaying]);
-
-  const handleNextTrack = useCallback(() => {
-    setCurrentTrackIndex((prev) => (prev + 1) % TRACKS.length);
-  }, []);
-
-  const handlePrevTrack = useCallback(() => {
-    setCurrentTrackIndex((prev) => (prev - 1 + TRACKS.length) % TRACKS.length);
-  }, []);
+  const currentTrack = TRACKS[0];
 
   // Smooth Volume Fade-in helper
   const fadeInAndPlay = useCallback(() => {
@@ -63,42 +48,26 @@ const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
   // Initialize audio once
   useEffect(() => {
     const audio = new Audio();
-    audio.src = TRACKS[0].src;
+    audio.src = currentTrack.src;
     audio.loop = true;
     audio.volume = 0.75;
     audioRef.current = audio;
 
     const onPlay = () => setIsPlaying(true);
     const onPause = () => setIsPlaying(false);
-    const onEnded = () => handleNextTrack();
 
     audio.addEventListener('play', onPlay);
     audio.addEventListener('pause', onPause);
-    audio.addEventListener('ended', onEnded);
 
     return () => {
       if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
       audio.removeEventListener('play', onPlay);
       audio.removeEventListener('pause', onPause);
-      audio.removeEventListener('ended', onEnded);
       audio.pause();
       audio.src = '';
       audio.remove();
     };
-  }, [handleNextTrack]);
-
-  // Update track source when track changes
-  useEffect(() => {
-    if (!audioRef.current) return;
-    const wasPlaying = isPlayingRef.current;
-    audioRef.current.src = currentTrack.src;
-    audioRef.current.load();
-    if (wasPlaying) {
-      audioRef.current.play().catch((err) => {
-        console.log('Audio playback prevented:', err);
-      });
-    }
-  }, [currentTrack]);
+  }, [currentTrack.src]);
 
   // Handle volume updates
   useEffect(() => {
@@ -138,20 +107,20 @@ const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: 'spring', damping: 22, stiffness: 260 }}
-            className="absolute bottom-16 left-0 w-84 sm:w-92 p-4 rounded-3xl bg-[var(--color-bg-surface,#082032)]/95 border-2 border-[var(--color-gold-border,rgba(212,175,55,0.4))] shadow-[0_12px_40px_rgba(0,0,0,0.65)] backdrop-blur-xl text-stone-100 space-y-4"
+            className="absolute bottom-16 left-0 w-80 sm:w-88 p-4 rounded-3xl bg-[var(--color-bg-surface,#07261d)]/95 border-2 border-[var(--color-gold-border,rgba(225,190,101,0.4))] shadow-[0_12px_40px_rgba(0,0,0,0.7)] backdrop-blur-xl text-stone-100 space-y-4"
           >
             {/* Header with Track Details */}
-            <div className="flex items-center justify-between border-b border-[var(--color-gold-border,rgba(212,175,55,0.3))]/50 pb-3">
+            <div className="flex items-center justify-between border-b border-[var(--color-gold-border,rgba(225,190,101,0.3))]/50 pb-3">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-full bg-[var(--color-gold-mid,#e1be65)]/20 border border-[var(--color-gold-mid,#e1be65)] flex items-center justify-center text-[var(--color-gold-light,#fef4cf)]">
                   <Music className="w-4 h-4" />
                 </div>
                 <div>
                   <h4 className="font-cinzel text-xs font-bold uppercase tracking-widest text-[var(--color-gold-light,#fef4cf)]">
-                    Wedding Music Player
+                    Wedding Music
                   </h4>
                   <p className="font-garamond text-[11px] text-[var(--color-text-muted,#d4cfc3)]">
-                    Traditional & Romantic Instrumentals
+                    Auspicious Ceremonial BGM
                   </p>
                 </div>
               </div>
@@ -166,7 +135,7 @@ const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
             </div>
 
             {/* Currently Playing Card */}
-            <div className="p-3 rounded-2xl bg-[var(--color-bg-card,#0c3529)]/70 border border-[var(--color-gold-border,rgba(212,175,55,0.3))] flex items-center gap-3">
+            <div className="p-3.5 rounded-2xl bg-[var(--color-bg-card,#0c3529)]/80 border border-[var(--color-gold-border,rgba(225,190,101,0.3))] flex items-center gap-3.5">
               {/* Spinning Vinyl Indicator */}
               <div className="relative w-12 h-12 shrink-0">
                 <motion.div
@@ -206,35 +175,27 @@ const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
             </div>
 
             {/* Playback Controls & Volume */}
-            <div className="flex items-center justify-between gap-3 pt-1">
-              <div className="flex items-center gap-1">
-                <button
-                  onClick={handlePrevTrack}
-                  className="p-2 rounded-xl text-stone-300 hover:text-[var(--color-gold-light,#fef4cf)] hover:bg-white/5 transition-colors cursor-pointer"
-                  title="Previous Track"
-                >
-                  <SkipBack className="w-4 h-4" />
-                </button>
-
-                <button
-                  onClick={togglePlay}
-                  className="p-3 rounded-full bg-gradient-to-r from-[var(--color-gold-mid,#e1be65)] to-[var(--color-gold-dark,#b38b34)] text-slate-950 font-bold shadow-lg hover:scale-105 active:scale-95 transition-transform cursor-pointer"
-                  title={isPlaying ? 'Pause Music' : 'Play Music'}
-                >
-                  {isPlaying ? <Pause className="w-4 h-4 fill-slate-950" /> : <Play className="w-4 h-4 fill-slate-950 ml-0.5" />}
-                </button>
-
-                <button
-                  onClick={handleNextTrack}
-                  className="p-2 rounded-xl text-stone-300 hover:text-[var(--color-gold-light,#fef4cf)] hover:bg-white/5 transition-colors cursor-pointer"
-                  title="Next Track"
-                >
-                  <SkipForward className="w-4 h-4" />
-                </button>
-              </div>
+            <div className="flex items-center justify-between gap-4 pt-1">
+              <button
+                onClick={togglePlay}
+                className="px-4 py-2.5 rounded-full bg-gradient-to-r from-[var(--color-gold-mid,#e1be65)] to-[var(--color-gold-dark,#b38b34)] text-slate-950 font-cinzel text-xs font-bold shadow-lg hover:scale-105 active:scale-95 transition-transform cursor-pointer flex items-center gap-2"
+                title={isPlaying ? 'Pause Music' : 'Play Music'}
+              >
+                {isPlaying ? (
+                  <>
+                    <Pause className="w-3.5 h-3.5 fill-slate-950" />
+                    <span>Pause</span>
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-3.5 h-3.5 fill-slate-950 ml-0.5" />
+                    <span>Play</span>
+                  </>
+                )}
+              </button>
 
               {/* Volume Slider & Mute */}
-              <div className="flex items-center gap-2 flex-1 max-w-[140px]">
+              <div className="flex items-center gap-2 flex-1 max-w-[150px]">
                 <button
                   onClick={toggleMute}
                   className="text-stone-300 hover:text-[var(--color-gold-light,#fef4cf)] p-1 cursor-pointer"
@@ -261,47 +222,9 @@ const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
               </div>
             </div>
 
-            {/* Playlist Track Selection */}
-            <div className="space-y-1.5 pt-2 border-t border-[var(--color-gold-border,rgba(212,175,55,0.2))]/40 max-h-44 overflow-y-auto pr-1">
-              <span className="text-[10px] uppercase font-cinzel text-[var(--color-gold-light,#fef4cf)] font-semibold tracking-wider">
-                Select Instrumental Track
-              </span>
-              {TRACKS.map((t, idx) => {
-                const isSelected = idx === currentTrackIndex;
-                return (
-                  <button
-                    key={t.id}
-                    onClick={() => {
-                      setCurrentTrackIndex(idx);
-                      if (!isPlaying) fadeInAndPlay();
-                    }}
-                    className={`w-full p-2 rounded-xl text-left flex items-center justify-between text-xs transition-all cursor-pointer ${
-                      isSelected
-                        ? 'bg-[var(--color-gold-mid,#e1be65)]/20 border border-[var(--color-gold-mid,#e1be65)]/50 text-[var(--color-gold-light,#fef4cf)] font-semibold'
-                        : 'hover:bg-white/5 text-stone-300 border border-transparent'
-                    }`}
-                  >
-                    <div className="truncate mr-2">
-                      <p className="truncate">{t.title}</p>
-                      <p className="text-[10px] text-[var(--color-text-muted,#d4cfc3)] truncate">{t.subtitle}</p>
-                    </div>
-                    {isSelected ? (
-                      <span className="text-[10px] font-cinzel uppercase px-1.5 py-0.5 rounded bg-[var(--color-gold-mid,#e1be65)] text-slate-950 font-bold shrink-0">
-                        Playing
-                      </span>
-                    ) : (
-                      <span className="text-[10px] text-stone-500 font-cinzel shrink-0">
-                        {t.tag}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-
             {/* Replay Invitation Ceremony Button */}
             {onReplayEnvelope && (
-              <div className="pt-2 border-t border-[var(--color-gold-border,rgba(212,175,55,0.2))]/40">
+              <div className="pt-2 border-t border-[var(--color-gold-border,rgba(225,190,101,0.2))]/40">
                 <button
                   onClick={() => {
                     setIsExpanded(false);
@@ -327,7 +250,7 @@ const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
           className={`relative p-3 rounded-full border-2 border-[var(--color-gold-mid,#e1be65)] backdrop-blur-xl shadow-[0_8px_25px_rgba(0,0,0,0.5)] transition-all flex items-center justify-center cursor-pointer ${
             isPlaying
               ? 'bg-gradient-to-tr from-amber-600 via-amber-400 to-amber-500 text-slate-950 shadow-amber-500/30'
-              : 'bg-[var(--color-bg-surface,#082032)]/95 text-[var(--color-gold-light,#fef4cf)] hover:bg-[var(--color-bg-card,#0c3529)]'
+              : 'bg-[var(--color-bg-surface,#07261d)]/95 text-[var(--color-gold-light,#fef4cf)] hover:bg-[var(--color-bg-card,#0c3529)]'
           }`}
           title={isPlaying ? 'Pause Background Music' : 'Play Background Music'}
           aria-label="Toggle Wedding Music"
@@ -351,14 +274,14 @@ const MusicPlayer = ({ autoPlayTrigger, onReplayEnvelope }) => {
           )}
         </motion.button>
 
-        {/* Small Capsule Pill to Open Music Menu */}
+        {/* Small Capsule Pill */}
         <motion.button
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           onClick={() => setIsExpanded(!isExpanded)}
-          className="hidden sm:flex items-center gap-2 py-2 px-3 rounded-full bg-[var(--color-bg-surface,#082032)]/90 border border-[var(--color-gold-border,rgba(212,175,55,0.4))] shadow-lg backdrop-blur-md text-[var(--color-gold-light,#fef4cf)] hover:border-[var(--color-gold-mid,#e1be65)] transition-all cursor-pointer"
+          className="hidden sm:flex items-center gap-2 py-2 px-3.5 rounded-full bg-[var(--color-bg-surface,#07261d)]/90 border border-[var(--color-gold-border,rgba(225,190,101,0.4))] shadow-lg backdrop-blur-md text-[var(--color-gold-light,#fef4cf)] hover:border-[var(--color-gold-mid,#e1be65)] transition-all cursor-pointer"
         >
-          <span className="font-cinzel text-[11px] font-semibold tracking-wider max-w-[120px] truncate">
+          <span className="font-cinzel text-[11px] font-semibold tracking-wider max-w-[170px] truncate">
             {currentTrack.title}
           </span>
           <ChevronUp

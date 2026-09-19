@@ -356,9 +356,9 @@ const EnvelopeOpening = ({ onOpen }) => {
               <p className="font-garamond italic text-base sm:text-lg text-amber-200/90 font-medium">
                 Tap the wax seal to unveil the wedding invitation & play music
               </p>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-amber-500/30 text-[11px] font-cinzel text-amber-300/80">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/40 border border-amber-500/30 text-[11px] font-cinzel text-amber-300/85 shadow-sm">
                 <Volume2 className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-                <span>Traditional Shehnai & Nadaswaram BGM</span>
+                <span>En Jeevan (Vaikom Vijayalakshmi)</span>
               </div>
             </motion.div>
           </motion.div>
